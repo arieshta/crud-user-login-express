@@ -45,9 +45,9 @@ const initServer = () => {
 };
 
 // Connect db and start server
-mongoose.connect('mongodb+srv://docky:dockdock@cluster0.e0qrp.mongodb.net/testdb?retryWrites=true&w=majority', () => {
+mongoose.connect('mongodb+srv://docky:dockdock@cluster0.e0qrp.mongodb.net/testdb?retryWrites=true&w=majority', async () => {
     console.log('connected to DB');
-    dropCollection()
-    initAdmin()
+    await dropCollection()
+    await initAdmin()
     initServer();
 })

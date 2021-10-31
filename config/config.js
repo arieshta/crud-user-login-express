@@ -20,10 +20,10 @@ const initAdmin = async () => {
 
 // Drop collection
 const dropCollection = async () => {
-    console.log('drop collection');
+    console.log('Drop collection');
     try {
-        await Users.db.dropCollection('users')
-        // await Users.collection.drop();        
+        // await Users.db.dropCollection('users')
+        await Users.collection.drop();        
     } catch (err) {
         console.log('drop failed', err)
     }
