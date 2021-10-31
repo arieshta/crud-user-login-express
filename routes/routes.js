@@ -11,6 +11,6 @@ const logoutRoute = require('./logoutRoute');
 router.use('/logout', logoutRoute);
 
 const usersRoute = require('./usersRoute');
-router.use('/users', usersRoute);
+router.use('/users', auth, usersRoute);
 
 module.exports = router;

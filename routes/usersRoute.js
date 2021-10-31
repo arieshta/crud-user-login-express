@@ -14,15 +14,15 @@ const router = express.Router();
 router.post('/', registerController);
 
 // Get all users
-router.get('/', auth, getAllUserController);
+router.get('/', getAllUserController);
 
 // Get user by id
-router.get('/:id', auth, getUserByIdController);
+router.get('/:id', getUserByIdController);
 
 // Update user by id
-router.put('/:id', auth, updateUserByIdController);
+router.put('/:id', updateUserByIdController);
 
 // Delete user by id
-router.delete('/:id', auth, deleteUserByIdController);
+router.delete('/:id', deleteUserByIdController);
 
 module.exports = router;

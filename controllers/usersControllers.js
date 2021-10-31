@@ -3,15 +3,15 @@ const { registrationValidation } = require('../auth/validations');
 const Users = require('../models/usersModel');
 
 const registerController = async (req, res) => {
-    // if (req.user.role != 'admin') {
-    //     return res.status(401).json({ message: 'Access Denied' });
-    // }
+    if (req.user.role != 'admin') {
+        return res.status(401).json({ message: 'Access Denied' });
+    }
 
     var err = registrationValidation(req.body);
     if (err) return res.status(400).json({ message: err });
 
-    // var user = await Users.findOne({ username: req.body.username });
-    // if (user) return res.status(400).json({ message: 'username already used' });
+    var user = await Users.findOne({ username: req.body.username });
+    if (user) return res.status(400).json({ message: 'username already used' });
 
     if (
         req.body.role == 'admin' &&
