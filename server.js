@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bearer = require('express-bearer-token');
-const router = require('./routes/routes');
-const { dropCollection, initAdmin } = require('./config/config');
+const router = require('./src/routes/routes');
+const { dropCollection, initAdmin } = require('./src/config/config');
 require('dotenv/config');
 
 const app = express();
@@ -45,7 +45,7 @@ const initServer = () => {
 };
 
 // Connect db and start server
-mongoose.connect('mongodb+srv://docky:dockdock@cluster0.e0qrp.mongodb.net/testdb?retryWrites=true&w=majority', async () => {
+mongoose.connect(process.env.DB_CONNECTION, async () => {
     console.log('connected to DB');
     await dropCollection()
     await initAdmin()
