@@ -76,7 +76,7 @@ const updateUserByIdController = async (req, res) => {
                     username: req.body.username,
                     fullname: req.body.fullname,
                     password: req.body.password,
-                    updated: Date.now
+                    updated: Date.now()
                 }
             }
         );
