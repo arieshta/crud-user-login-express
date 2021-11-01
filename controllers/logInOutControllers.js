@@ -9,7 +9,10 @@ const loginController = (req, res) => {
         if (user) {
             const token = generateToken(user._id, user.role);
             res.header('token', token);
-            res.json({ message: `success login as ${req.body.username}` });
+            res.header('id', user._id); // for test purpose
+            res.json({
+                message: `success login as ${req.body.username}`
+            });
         } else {
             res.json({ message: `login failed: ${err}` });
         }
