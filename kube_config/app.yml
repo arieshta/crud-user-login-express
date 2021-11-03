@@ -15,8 +15,8 @@ spec:
         app: app
     spec:
       containers:
-      - name: appdb
-        image: app:latest
+      - name: app
+        image: arieshta/mongodb-express-node-crud-user:latest
         ports:
         - containerPort: 3000
         env:
