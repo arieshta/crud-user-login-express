@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: appdb
+        image: app:latest
+        ports:
+        - containerPort: 3000
+        env:
+          - name:  DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name:  mongo-secret
+                key:  mongo-user
+          - name:  DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name:  mongo-secret
+                key:  mongo-password
+          - name:  DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name:  mongo-config
+                key:  mongo-host
+          - name:  DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name:  mongo-config
+                key:  mongo-port
+          - name:  DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name:  mongo-config
+                key:  mongo-dbname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  type: NodePort
+  selector:
+    app: app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30000

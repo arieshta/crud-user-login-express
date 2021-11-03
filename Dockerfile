@@ -7,7 +7,6 @@ COPY package*.json ./
 RUN npm ci
 
 COPY ./src/ ./src/
-COPY .env .
 COPY server.js .
 
 EXPOSE 3000
