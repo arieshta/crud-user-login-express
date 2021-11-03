@@ -45,7 +45,9 @@ const initServer = () => {
 };
 
 // Connect db and start server
-mongoose.connect(process.env.DB_CONNECTION, async () => {
+// dbConnection = process.env.DB_CONNECTION
+dbConnection = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+mongoose.connect(dbConnection, async () => {
     console.log('connected to DB');
     await dropCollection()
     await initAdmin()
